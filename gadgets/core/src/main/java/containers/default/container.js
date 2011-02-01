@@ -44,7 +44,9 @@
 
 // Container must be an array; this allows multiple containers
 // to share configuration.
-{"gadgets.container" : ["default"],
+// TODO: Move out accel container config into a separate accel.js file.
+// TODO : remove "" container
+{"gadgets.container" : ["default", "accel", ""],
 
 // Set of regular expressions to validate the parent parameter. This is
 // necessary to support situations where you want a single container to support
@@ -60,37 +62,44 @@
 // DNS domain on which gadgets should render.
 "gadgets.lockedDomainSuffix" : "-a.example.com:8080",
 
+// Origins for CORS requests and/or Referer validation
+// Indicate a set of origins or an entry with * to indicate that all origins are allowed
+"gadgets.parentOrigins" : ["*"],
+
 // Various urls generated throughout the code base.
 // iframeBaseUri will automatically have the host inserted
 // if locked domain is enabled and the implementation supports it.
 // query parameters will be added.
 "gadgets.iframeBaseUri" : "/eXoGadgetServer/gadgets/ifr",
+"gadgets.uri.iframe.basePath" : "/eXoGadgetServer/gadgets/ifr",
 
 // jsUriTemplate will have %host% and %js% substituted.
 // No locked domain special cases, but jsUriTemplate must
 // never conflict with a lockedDomainSuffix.
 "gadgets.jsUriTemplate" : "http://%host%/eXoGadgetServer/gadgets/js/%js%",
 
+//New configuration for iframeUri generation:
+"gadgets.uri.iframe.lockedDomainSuffix" :  "-a.example.com:8080",
+"gadgets.uri.iframe.unlockedDomain" : "localhost:8080",
+"gadgets.uri.iframe.basePath" : "/eXoGadgetServer/gadgets/ifr",
+
+
 // Callback URL.  Scheme relative URL for easy switch between https/http.
-"gadgets.oauthGadgetCallbackTemplate" : "//%host%/eXoGadgetServer/gadgets/oauthcallback",
+"gadgets.uri.oauth.callbackTemplate" : "//%host%/eXoGadgetServer/gadgets/oauthcallback",
 
 // Use an insecure security token by default
 "gadgets.securityTokenType" : "secure",
 "gadgets.securityTokenKeyFile" : "key.txt",
 
-"gadgets.signingKeyFile" : "oauthkey.pem",
-"gadgets.signingKeyName" : "mytestkey",
-
-"gadgets.signedFetchDomain" : "eXo",
 // Config param to load Opensocial data for social
 // preloads in data pipelining.  %host% will be
 // substituted with the current host.
 "gadgets.osDataUri" : "http://%host%/social/rpc",
 
-// Uncomment these to switch to a secure version
-//
-//"gadgets.securityTokenType" : "secure",
-//"gadgets.securityTokenKeyFile" : "/path/to/key/file.txt",
+"gadgets.signingKeyFile" : "oauthkey.pem",
+"gadgets.signingKeyName" : "mytestkey",
+
+"gadgets.signedFetchDomain" : "eXo",
 
 "gadgets.content-rewrite" : {
   "include-urls": ".*",
@@ -101,6 +110,19 @@
   "concat-url": "/eXoGadgetServer/gadgets/concat?"
 },
 
+// Default Js Uri config: also must be overridden.
+"gadgets.uri.js.host" : "http://localhost:8080/",
+"gadgets.uri.js.path" : "/eXoGadgetServer/gadgets/js",
+
+// Default concat Uri config; used for testing.
+"gadgets.uri.concat.host" : "localhost:8080",
+"gadgets.uri.concat.path" : "/eXoGadgetServer/gadgets/concat",
+"gadgets.uri.concat.js.splitToken" : "false",
+
+// Default proxy Uri config; used for testing.
+"gadgets.uri.proxy.host" : "localhost:8080",
+"gadgets.uri.proxy.path" : "/eXoGadgetServer/gadgets/proxy",
+
 // This config data will be passed down to javascript. Please
 // configure your object using the feature name rather than
 // the javascript name.
@@ -110,8 +132,8 @@
 "gadgets.features" : {
   "core.io" : {
     // Note: /proxy is an open proxy. Be careful how you expose this!
-    "proxyUrl" : "http://%host%/eXoGadgetServer/gadgets/proxy?refresh=%refresh%&url=%url%",
-    "jsonProxyUrl" : "http://%host%/eXoGadgetServer/gadgets/makeRequest"
+    "proxyUrl" : "//%host%/eXoGadgetServer/gadgets/proxy?container=default&refresh=%refresh%&url=%url%%rewriteMime%",
+    "jsonProxyUrl" : "//%host%/eXoGadgetServer/gadgets/makeRequest"
   },
   "views" : {
     "home" : {
@@ -147,22 +169,32 @@
       "ANCHOR_COLOR": ""
     }
   },
-  "opensocial-0.8" : {
+  "opensocial" : {
     // Path to fetch opensocial data from
     // Must be on the same domain as the gadget rendering server
-    "path" : "http://%host%/social",
+    "path" : "http://%host%/rpc",
+    // Path to issue invalidate calls
+    "invalidatePath" : "http://%host%/rpc",
     "domain" : "shindig",
     "enableCaja" : false,
     "supportedFields" : {
        "person" : ["id", {"name" : ["familyName", "givenName", "unstructured"]}, "thumbnailUrl", "profileUrl"],
-       "activity" : ["id", "title"]
+       "activity" : ["appId", "body", "bodyId", "externalId", "id", "mediaItems", "postedTime", "priority", 
+                     "streamFaviconUrl", "streamSourceUrl", "streamTitle", "streamUrl", "templateParams", "title",
+                     "url", "userId"],
+       "activityEntry" : ["icon", "postedTime", "actor", "verb", "object", "target", "generator", "provider", "title",
+                          "body", "standardLinks", "to", "cc", "bcc"],
+       "album" : ["id", "thumbnailUrl", "title", "description", "location", "ownerId"],
+       "mediaItem" : ["album_id", "created", "description", "duration", "file_size", "id", "language", "last_updated",
+                      "location", "mime_type", "num_comments", "num_views", "num_votes", "rating", "start_time",
+                      "tagged_people", "tags", "thumbnail_url", "title", "type", "url"]
     }
   },
   "osapi.services" : {
     // Specifying a binding to "container.listMethods" instructs osapi to dynamicaly introspect the services
     // provided by the container and delay the gadget onLoad handler until that introspection is
     // complete.
-    // Alternatively a container can directly configure services here rather than having them 
+    // Alternatively a container can directly configure services here rather than having them
     // introspected. Simply list out the available servies and omit "container.listMethods" to
     // avoid the initialization delay caused by gadgets.rpc
     // E.g. "gadgets.rpc" : ["activities.requestCreate", "messages.requestSend", "requestShareApp", "requestPermission"]
@@ -170,7 +202,7 @@
   },
 //  "osapi" : {
 //    // The endpoints to query for available JSONRPC/REST services
-//    "endPoints" : [ "http://%host%/social/rpc", "http://%host%/gadgets/api/rpc" ]                   
+//    "endPoints" : [ "http://%host%/social/rpc", "http://%host%/gadgets/api/rpc" ]
 //  },
   "osml": {
     // OSML library resource.  Can be set to null or the empty string to disable OSML

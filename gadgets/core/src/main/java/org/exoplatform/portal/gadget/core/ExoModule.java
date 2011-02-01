@@ -19,6 +19,7 @@
 
 package org.exoplatform.portal.gadget.core;
 
+import com.google.inject.AbstractModule;
 import org.apache.shindig.config.ContainerConfig;
 import org.apache.shindig.gadgets.DefaultGuiceModule;
 import org.apache.shindig.gadgets.http.HttpFetcher;
@@ -31,15 +32,12 @@ import org.apache.shindig.gadgets.http.HttpFetcher;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ExoModule extends DefaultGuiceModule
+public class ExoModule extends AbstractModule
 {
 
    @Override
    protected void configure()
    {
-      //super.configure();
-
-      //
       bind(ContainerConfig.class).to(ExoContainerConfig.class);
       bind(HttpFetcher.class).to(ExoHttpFetcher.class);
    }

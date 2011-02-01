@@ -35,7 +35,7 @@
                   <configuration>
                      <artifactItems>
                         <artifactItem>
-                           <groupId>org.gatein.shindig</groupId>
+                           <groupId>org.apache.shindig</groupId>
                            <artifactId>shindig-gadgets</artifactId>
                            <version>${org.shindig.version}</version>
                            <type>jar</type>
@@ -79,15 +79,15 @@
          <artifactId>exo.kernel.container</artifactId>
      </dependency>
      <dependency>
-       <groupId>org.gatein.shindig</groupId>
+       <groupId>org.apache.shindig</groupId>
        <artifactId>shindig-gadgets</artifactId>
      </dependency>
       <dependency>
-         <groupId>org.gatein.shindig</groupId>
+         <groupId>org.apache.shindig</groupId>
          <artifactId>shindig-common</artifactId>
       </dependency>
       <dependency>
-         <groupId>org.gatein.shindig</groupId>
+         <groupId>org.apache.shindig</groupId>
          <artifactId>shindig-features</artifactId>
       </dependency>
       <dependency>
