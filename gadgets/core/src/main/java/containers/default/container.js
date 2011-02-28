@@ -80,7 +80,7 @@
 
 //New configuration for iframeUri generation:
 "gadgets.uri.iframe.lockedDomainSuffix" :  "-a.example.com:8080",
-"gadgets.uri.iframe.unlockedDomain" : "localhost:8080",
+"gadgets.uri.iframe.unlockedDomain" : "http://localhost:8080",
 "gadgets.uri.iframe.basePath" : "/eXoGadgetServer/gadgets/ifr",
 
 
@@ -94,7 +94,7 @@
 // Config param to load Opensocial data for social
 // preloads in data pipelining.  %host% will be
 // substituted with the current host.
-"gadgets.osDataUri" : "http://%host%/social/rpc",
+"gadgets.osDataUri" : "http://%host%/rpc",
 
 "gadgets.signingKeyFile" : "oauthkey.pem",
 "gadgets.signingKeyName" : "mytestkey",
@@ -200,10 +200,10 @@
     // E.g. "gadgets.rpc" : ["activities.requestCreate", "messages.requestSend", "requestShareApp", "requestPermission"]
     "gadgets.rpc" : ["container.listMethods"]
   },
-//  "osapi" : {
-//    // The endpoints to query for available JSONRPC/REST services
-//    "endPoints" : [ "http://%host%/social/rpc", "http://%host%/gadgets/api/rpc" ]
-//  },
+  "osapi" : {
+    // The endpoints to query for available JSONRPC/REST services
+    "endPoints" : [ "http://%host%/rpc" ]
+  },
   "osml": {
     // OSML library resource.  Can be set to null or the empty string to disable OSML
     // for a container.

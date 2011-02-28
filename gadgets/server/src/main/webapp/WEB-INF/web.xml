@@ -79,7 +79,7 @@
   </filter-mapping>
 
   <listener>
-     <listener-class>org.apache.shindig.common.servlet.GuiceServletContextListener</listener-class>
+    <listener-class>org.apache.shindig.common.servlet.GuiceServletContextListener</listener-class>
   </listener>
 
   <!-- Render a Gadget -->
@@ -138,7 +138,7 @@
     </servlet-class>
     <init-param>
       <param-name>handlers</param-name>
-      <param-value>org.apache.shindig.gadgets.handlers</param-value>
+      <param-value>org.apache.shindig.handlers</param-value>
     </init-param>
   </servlet>
 
@@ -149,7 +149,7 @@
     </servlet-class>
     <init-param>
       <param-name>handlers</param-name>
-      <param-value>org.apache.shindig.gadgets.handlers</param-value>
+      <param-value>org.apache.shindig.handlers</param-value>
     </init-param>
   </servlet>
 

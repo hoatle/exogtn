@@ -631,7 +631,7 @@ gadgets.IfrGadget.prototype.generateForm = function(gadget) {
     var j = 0;
     for (var att in prefs) {
 	    	//TODO: dang.tung not append when using list
-				type = prefs[att].type;
+				type = prefs[att].dataType.toLowerCase();
 				if(type == "list"|| type == "hidden") continue;
 				// end
         var attEl = document.createElement("div");
