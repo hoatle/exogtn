@@ -22,6 +22,8 @@ import com.google.inject.Singleton;
 
 import com.google.inject.Inject;
 
+import com.google.inject.name.Named;
+import org.apache.shindig.common.Nullable;
 import org.apache.shindig.gadgets.http.BasicHttpFetcher;
 
 /**
@@ -39,8 +41,11 @@ public class ExoHttpFetcher extends BasicHttpFetcher
    private static final int DEFAULT_MAX_OBJECT_SIZE = 1024 * 1024;
    
    @Inject
-   public ExoHttpFetcher()
+   public ExoHttpFetcher(@Nullable @Named("org.apache.shindig.gadgets.http.basicHttpFetcherProxy")
+                         String basicHttpFetcherProxy)
    {
-      super(DEFAULT_MAX_OBJECT_SIZE, DEFAULT_CONNECT_TIMEOUT_MS);
+      super(basicHttpFetcherProxy);
+      setConnectionTimeoutMs(DEFAULT_CONNECT_TIMEOUT_MS);
+      setMaxObjectSizeBytes(DEFAULT_MAX_OBJECT_SIZE);
    }
 }

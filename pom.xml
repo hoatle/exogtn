@@ -42,7 +42,7 @@
       <org.exoplatform.ws.version>2.2.0-CR3</org.exoplatform.ws.version>
       <org.exoplatform.jcr.version>1.14.0-CR3</org.exoplatform.jcr.version>
       <org.jibx.version>1.2.2</org.jibx.version>
-      <org.shindig.version>1.0-r790473-Patch05</org.shindig.version>
+      <org.shindig.version>2.0.2</org.shindig.version>
       <nl.captcha.simplecaptcha.version>1.1.1-GA-Patch01</nl.captcha.simplecaptcha.version>
       <org.gatein.common.version>2.0.3-GA</org.gatein.common.version>
       <org.gatein.wci.version>2.0.2-GA</org.gatein.wci.version>
@@ -760,33 +760,33 @@
          </dependency>
 
          <dependency>
-            <groupId>org.gatein.shindig</groupId>
+            <groupId>org.apache.shindig</groupId>
             <artifactId>shindig-gadgets</artifactId>
             <version>${org.shindig.version}</version>
          </dependency>
          <dependency>
-            <groupId>org.gatein.shindig</groupId>
+            <groupId>org.apache.shindig</groupId>
             <artifactId>shindig-features</artifactId>
             <version>${org.shindig.version}</version>
          </dependency>
          <dependency>
-            <groupId>org.gatein.shindig</groupId>
+            <groupId>org.apache.shindig</groupId>
             <artifactId>shindig-common</artifactId>
             <version>${org.shindig.version}</version>
          </dependency>
          <dependency>
-            <groupId>org.gatein.shindig</groupId>
+            <groupId>org.apache.shindig</groupId>
             <artifactId>shindig-server</artifactId>
             <version>${org.shindig.version}</version>
          </dependency>
          <dependency>
-            <groupId>org.gatein.shindig</groupId>
+            <groupId>org.apache.shindig</groupId>
             <artifactId>shindig-server</artifactId>
             <version>${org.shindig.version}</version>
             <type>war</type>
          </dependency>
          <dependency>
-            <groupId>org.gatein.shindig</groupId>
+            <groupId>org.apache.shindig</groupId>
             <artifactId>shindig-social-api</artifactId>
             <version>${org.shindig.version}</version>
          </dependency>
