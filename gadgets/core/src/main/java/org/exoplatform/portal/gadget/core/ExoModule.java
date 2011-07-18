@@ -19,18 +19,33 @@
 
 package org.exoplatform.portal.gadget.core;
 
+import com.google.common.collect.ImmutableSet;
+
+import com.google.inject.multibindings.Multibinder;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 
 import org.apache.shindig.config.ContainerConfig;
 import org.apache.shindig.gadgets.DefaultGuiceModule;
 import org.apache.shindig.gadgets.http.HttpFetcher;
+import org.apache.shindig.gadgets.http.InvalidationHandler;
+import org.apache.shindig.gadgets.servlet.GadgetsHandler;
+import org.apache.shindig.gadgets.servlet.HttpRequestHandler;
 import org.apache.shindig.protocol.conversion.BeanConverter;
 import org.apache.shindig.protocol.conversion.BeanJsonConverter;
 import org.apache.shindig.protocol.conversion.BeanXStreamConverter;
 import org.apache.shindig.protocol.conversion.xstream.XStreamConfiguration;
 import org.apache.shindig.social.core.util.xstream.XStream081Configuration;
 import org.apache.shindig.social.core.util.BeanXStreamAtomConverter;
+import org.apache.shindig.social.opensocial.service.ActivityHandler;
+import org.apache.shindig.social.opensocial.service.AlbumHandler;
+import org.apache.shindig.social.opensocial.service.AppDataHandler;
+import org.apache.shindig.social.opensocial.service.MediaItemHandler;
+import org.apache.shindig.social.opensocial.service.MessageHandler;
+import org.apache.shindig.social.opensocial.service.PersonHandler;
+
+import java.util.Set;
 
 /**
  * The goal of the module is to bind the {@link org.apache.shindig.common.ContainerConfig} interface to the
@@ -48,9 +63,22 @@ public class ExoModule extends AbstractModule
    {
       bind(ContainerConfig.class).to(ExoContainerConfig.class);
       bind(HttpFetcher.class).to(ExoHttpFetcher.class);
+      
       bind(XStreamConfiguration.class).to(XStream081Configuration.class);
       bind(BeanConverter.class).annotatedWith(Names.named("shindig.bean.converter.xml")).to(BeanXStreamConverter.class);
       bind(BeanConverter.class).annotatedWith(Names.named("shindig.bean.converter.json")).to(BeanJsonConverter.class);
       bind(BeanConverter.class).annotatedWith(Names.named("shindig.bean.converter.atom")).to(BeanXStreamAtomConverter.class);
+      
+      Multibinder<Object> handlerBinder = Multibinder.newSetBinder(binder(), Object.class, Names.named("org.apache.shindig.handlers"));
+      for (Class handler : getHandlers()) {
+        handlerBinder.addBinding().toInstance(handler);
+      }
+   }
+   
+   /**
+    * Hook to provide a Set of request handlers. 
+    */
+   protected Set<Class<?>> getHandlers() {
+     return ImmutableSet.<Class<?>>of(InvalidationHandler.class, HttpRequestHandler.class, ExoGadgetsHandler.class);
    }
 }
