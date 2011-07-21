@@ -223,7 +223,7 @@ function getModule(params)
    new Project("org.exoplatform.portal", "exo.portal.gadgets-server", "war", module.version).
       addDependency(new Project("commons-io", "commons-io", "jar", "1.4")).
       addDependency(new Project("commons-codec", "commons-codec", "jar", "1.4")).
-      addDependency(new Project("net.oauth", "core", "jar", "20080621")).
+      addDependency(new Project("net.oauth", "core", "jar", "20100527")).
       addDependency(new Project("com.google.guava", "guava", "jar", "r07")).
       addDependency(new Project("com.google.code.guice", "guice", "jar", "2.0")).
       addDependency(new Project("com.google.code.guice", "guice-jmx", "jar", "2.0")).
