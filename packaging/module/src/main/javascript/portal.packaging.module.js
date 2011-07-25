@@ -223,7 +223,7 @@ function getModule(params)
    new Project("org.exoplatform.portal", "exo.portal.gadgets-server", "war", module.version).
       addDependency(new Project("commons-io", "commons-io", "jar", "1.4")).
       addDependency(new Project("commons-codec", "commons-codec", "jar", "1.4")).
-      addDependency(new Project("net.oauth", "core", "jar", "20100527")).
+      addDependency(new Project("net.oauth.core", "oauth", "jar", "20100527")).
       addDependency(new Project("com.google.guava", "guava", "jar", "r07")).
       addDependency(new Project("com.google.code.guice", "guice", "jar", "2.0")).
       addDependency(new Project("com.google.code.guice", "guice-jmx", "jar", "2.0")).
@@ -234,10 +234,10 @@ function getModule(params)
       addDependency(new Project("rome", "rome", "jar", "0.9")).
       addDependency(new Project("joda-time", "joda-time", "jar", "1.6")).
       addDependency(new Project("org.json", "json", "jar", "20070829")).
-      addDependency(new Project("org.apache.shindig", "shindig-common", "jar", shindigVersion)).
-      addDependency(new Project("org.apache.shindig", "shindig-gadgets", "jar", shindigVersion)).
-      addDependency(new Project("org.apache.shindig", "shindig-features", "jar", shindigVersion)).
-      addDependency(new Project("org.apache.shindig", "shindig-social-api", "jar", shindigVersion)).
+      addDependency(new Project("org.gatein.shindig", "shindig-common", "jar", shindigVersion)).
+      addDependency(new Project("org.gatein.shindig", "shindig-gadgets", "jar", shindigVersion)).
+      addDependency(new Project("org.gatein.shindig", "shindig-features", "jar", shindigVersion)).
+      addDependency(new Project("org.gatein.shindig", "shindig-social-api", "jar", shindigVersion)).
       addDependency(new Project("jdom", "jdom", "jar", "1.0")).
       addDependency(new Project("commons-httpclient", "commons-httpclient", "jar", "3.1")).
       addDependency(new Project("net.sf.ehcache", "ehcache", "jar", "1.6.0")).
