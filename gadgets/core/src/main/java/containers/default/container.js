@@ -80,7 +80,7 @@
 
 //New configuration for iframeUri generation:
 "gadgets.uri.iframe.lockedDomainSuffix" :  "-a.example.com:8080",
-"gadgets.uri.iframe.unlockedDomain" : "http://localhost:8080",
+"gadgets.uri.iframe.unlockedDomain" : "http://%host%",
 "gadgets.uri.iframe.basePath" : "/eXoGadgetServer/gadgets/ifr",
 
 
@@ -111,16 +111,16 @@
 },
 
 // Default Js Uri config: also must be overridden.
-"gadgets.uri.js.host" : "http://localhost:8080/",
+"gadgets.uri.js.host" : "http://%host%/",
 "gadgets.uri.js.path" : "/eXoGadgetServer/gadgets/js",
 
 // Default concat Uri config; used for testing.
-"gadgets.uri.concat.host" : "localhost:8080",
+"gadgets.uri.concat.host" : "%host%",
 "gadgets.uri.concat.path" : "/eXoGadgetServer/gadgets/concat",
 "gadgets.uri.concat.js.splitToken" : "false",
 
 // Default proxy Uri config; used for testing.
-"gadgets.uri.proxy.host" : "localhost:8080",
+"gadgets.uri.proxy.host" : "%host%",
 "gadgets.uri.proxy.path" : "/eXoGadgetServer/gadgets/proxy",
 
 // This config data will be passed down to javascript. Please
