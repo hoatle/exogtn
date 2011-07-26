@@ -52,11 +52,6 @@
             <artifactId>shindig-features</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.gatein.shindig</groupId>
-            <artifactId>shindig-social-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <!-- external dependencies -->
 
         <dependency>
@@ -137,16 +132,16 @@
 	        <scope>provided</scope>
 	    </dependency>
 	
-	<dependency>
-        <groupId>nu.validator.htmlparser</groupId>
-        <artifactId>htmlparser</artifactId>
-        <scope>provided</scope>
-    </dependency>
+	    <dependency>
+          <groupId>nu.validator.htmlparser</groupId>
+          <artifactId>htmlparser</artifactId>
+          <scope>provided</scope>
+      </dependency>
 
-	<dependency>
-        <groupId>commons-digester</groupId>
-        <artifactId>commons-digester</artifactId>
-        <scope>provided</scope>
-    </dependency>
+	    <dependency>
+          <groupId>commons-digester</groupId>
+          <artifactId>commons-digester</artifactId>
+          <scope>provided</scope>
+      </dependency>
     </dependencies>
 </project>
