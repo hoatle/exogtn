@@ -36,6 +36,37 @@ var eXo  = {
 } ;
 
 /**
+ * Exposes an object to be attached to a namespace, this is similar but more advanced than goog.provide(namespace).
+ * This object can be a class function or singleton object.
+ *
+ * @param namespace the name space string, for example: "eXo.core.MyClass".
+ * @param obj       the associated function or singleton object to be associated with this name space
+ *
+ * @see https://developers.google.com/closure/library/docs/tutorial
+ * @see https://gist.github.com/1897890
+ */
+eXo.provide = function(namespace, obj) {
+  if (!namespace || !obj) {
+    if (console) {
+      console.warn('eXo.provide: namespace or obj is not valid.');
+      console.info('namespace: ' + namespace);
+      console.info('obj: ' + obj);
+    }
+    return;
+  }
+  var names = namespace.split('.');
+  var tempNamespace = window;
+  for (var i = 0, len = names.length; i < len; i++) {
+    if (i == (len - 1)) {
+      //the last one
+      tempNamespace[names[i]] = obj;
+    } else {
+      tempNamespace = tempNamespace[names[i]] = tempNamespace[names[i]] || {};
+    }
+  }
+}
+
+/**
 * This function is deprecated, please use eXo.loadJS instead
 * 
 * This method will : 
